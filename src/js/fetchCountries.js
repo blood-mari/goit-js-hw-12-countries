@@ -21,7 +21,6 @@ function getRestData(countryName) {
     : baseUrl + countryName;
   return fetch(countryNameAPItoFetch).then(response => {
     if (response.ok || response.status === 404) return response.json();
-    // throw new Error('Error fetching data');
   }).catch(err => console.log(err));
 }
 
