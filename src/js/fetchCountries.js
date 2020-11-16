@@ -33,7 +33,7 @@ function searchData(event) {
 
 function operateData(data) {
   clearResult();
-  if (data.message) return showError(data.message);
+
   if (data.length > 10)
     return showError('Too many matches found. Please enter more specific query');
   if (data.length === 1) return (resultRef.innerHTML = countryCardTpl(data));
