@@ -19,7 +19,8 @@ function getRestData(countryName) {
 
     const searchQuery = false
          ? baseUrl + countryName + fullName
-         : baseUrl + countryName;
+        : baseUrl + countryName;
+
     return fetch(searchQuery).then(response => {
         if (response.ok || response.status === 404) return response.json();
         throw new Error('Error fetching data');
