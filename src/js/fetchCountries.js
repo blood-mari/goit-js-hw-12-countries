@@ -15,24 +15,29 @@ const fullName = '?fullText=true';
 
 
 function getRestData(countryName) {
-  resultRef.textContent = countryName;
-   const countryNameAPItoFetch = false
-    ? baseUrl + countryName + fullName
-    : baseUrl + countryName;
-  return fetch(countryNameAPItoFetch).then(response => {
-    if (response.ok || response.status === 404) return response.json();
-  }).catch(err => console.log(err));
+    resultRef.textContent = countryName;
+
+    const searchQuery = false
+         ? baseUrl + countryName + fullName
+         : baseUrl + countryName;
+    return fetch(searchQuery).then(response => {
+        if (response.ok || response.status === 404) return response.json();
+        throw new Error('Error fetching data');
+    });
 }
 
 function searchData(event) {
- removeError();
+    removeError();
+
   const countryName = event.target.value.trim();
   if (countryName.length === 0) return clearResult();
   fetchData(countryName);
 }
 
 function operateData(data) {
-  clearResult();
+    clearResult();
+
+    if (data.message) return showError(data.message);
 
   if (data.length > 10)
     return showError('Too many matches found. Please enter more specific query');
